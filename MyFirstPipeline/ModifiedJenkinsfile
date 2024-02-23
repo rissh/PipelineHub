@@ -1,0 +1,18 @@
+pipeline {
+  agent {
+    docker { image 'node:16-alpine' } // Use Node.js Alpine image
+  }
+  stages {
+    stage('Install Dependencies') { // Define stage to install dependencies
+      steps {
+        sh 'npm install' // Install Node.js dependencies
+      }
+    }
+    stage('Test') { // Define test stage
+      steps {
+        sh 'node --version' // Print Node.js version
+        sh 'npm --version' // Print npm version
+      }
+    }
+  }
+}
