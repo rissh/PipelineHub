@@ -1,0 +1,44 @@
+pipeline {
+  agent any // Use any available agent for the entire pipeline
+
+  stages {
+    stage('Back-end') {
+      agent {
+        docker { image 'maven:3.8.3-adoptopenjdk-11' } // Use Maven and AdoptOpenJDK Docker image as agent for this stage
+      }
+      steps {
+        script {
+          // Add a timeout to prevent the build from hanging indefinitely
+          timeout(time: 15, unit: 'MINUTES') {
+            // Execute Maven commands
+            sh 'mvn clean package'
+            sh 'mvn test'
+          }
+        }
+      }
+    }
+    stage('Front-end') {
+      agent {
+        docker { image 'node:16-alpine' } // Use Node.js Alpine image as agent for this stage
+      }
+      steps {
+        script {
+          // Add a timeout to prevent the build from hanging indefinitely
+          timeout(time: 10, unit: 'MINUTES') {
+            // Execute Node.js commands
+            sh 'npm install'
+            sh 'npm run build'
+            sh 'npm test'
+          }
+        }
+      }
+    }
+  }
+
+  post {
+    always {
+      // Cleanup workspace after each build
+      cleanWs()
+    }
+  }
+}
