@@ -4,8 +4,6 @@ Welcome to the Multi-Stage Multi-Agent project! This repository contains a CI/CD
 
 ## Overview
 
-## Overview
-
 The Multi-Stage Multi-Agent project is designed to automate the build, test, and deployment processes for polyglot projects. It supports projects written in multiple programming languages, such as Java and JavaScript. The pipeline uses Jenkins to orchestrate the CI/CD process and leverages Docker containers as agents to provide an isolated and consistent build environment.
 
 ## Jenkins Setup and Pipeline Execution
